@@ -1,0 +1,80 @@
+Assignment 2
+CREATE TABLE Shopper(
+Shopperid INTEGER CONSTRAINT acc_shop_pk PRIMARY KEY, ShopperName VARCHAR2(20) CONSTRAINT acc_nn NOT NULL,
+Gender CHAR(6) CONSTRAINT shop_ck CHECK(Gender IN('Male','Female')),
+MobileNo NUMBER CONSTRAINT shop_nn NOT NULL,
+Address VARCHAR2(50)
+);
+
+
+ Assignment 3
+alter table shopper modify mobileno  varchar2(15);
+
+
+Assignment 5
+create table store
+(
+name   varchar2(20) primary key,
+location   varchar2(30)  not null,
+managername  varchar2(30)  unique
+);
+
+
+Assignment 6:
+alter table store rename  column name to storename;
+
+ass 7
+create table Bill (
+BillNo number primary key,
+StoreName varchar2(20),
+Shopperid number,
+Arcode char(5),
+Amount number,
+BillDate date,
+Quantity number(4) default 1,
+CONSTRAINT ch_quan CHECK(Quantity >0),
+CONSTRAINT fk_stn foreign key (StoreName) REFERENCES
+Store(StoreName),
+CONSTRAINT fk_shid foreign key (Shopperid) REFERENCES
+Shopper(Shopperid),
+CONSTRAINT fk_ar foreign key (ArCode) REFERENCES
+Article(ArCode)	
+)
+
+ass8
+create table supplier(
+ Supplierid	VARCHAR2(6) PRIMARY KEY,	
+Name	       VARCHAR2(30),		
+ContactNo	VARCHAR2(15) NOT NULL,
+Emailid	VARCHAR2(30)
+);
+
+ass 9
+alter table supplier add city varchar2(10);
+
+ass 10
+alter table supplier drop (emailid)
+;
+
+ass 11
+create table city(
+city  varchar2(20)  unique
+);
+
+ass 12
+alter table city drop (city);
+
+ass 13
+create table Address (
+HouseNo  number ,
+Street varchar2(30) ,
+city  varchar2(20),
+zip number(6),
+state varchar2(5),
+CONSTRAINT pk_addr primary key(HouseNo,Street,city),
+CONSTRAINT fk_addr foreign key (city) REFERENCES City(city),
+CONSTRAINT ch_zip CHECK(ZIP>=0)
+);
+
+ass14
+ALTER TABLE Address MODIFY State VARCHAR2(20);
